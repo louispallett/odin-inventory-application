@@ -1,3 +1,9 @@
+connection.js
+package-lock.json
+old-populatedb.js
+populatedb.js
+models/
+
 # Logs
 logs
 *.log
