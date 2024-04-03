@@ -1,0 +1,10 @@
+extends layout
+
+block content 
+    h1=title
+    hr
+    div(class="content-wrapper")
+        if category_list.length 
+            each category in category_list
+                a(href=category.url class="list-item")
+                    p=category.name

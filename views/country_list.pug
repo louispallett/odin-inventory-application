@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+    div(class="content-title")
+        h1=title
+    hr
+    p Please note that countries are sorted by their abbreviation!
+    div(class="content-wrapper")
+        if country_list.length 
+            each country in country_list
+                a(href=country.url class="list-item")
+                    img(src=country.image_url)
+                    p=country.abbreviation
+                    div
+                    p=country.name

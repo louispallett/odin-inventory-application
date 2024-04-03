@@ -1,11 +1,15 @@
-const Category = require("../models/country");
+const Category = require("../models/category");
 
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 // Display list of all categories.
 exports.category_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: category list");
+  const allCategories = await Category.find().sort({ name:1 }).exec();
+  res.render("category_list", {
+    title: "Category List",
+    category_list: allCategories,
+  });
 });
 
 // Display detail page for a specific category.
