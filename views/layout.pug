@@ -6,25 +6,31 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/stylesheets/styles.css")
   body
-    div(class="")
-      div(class="")
-        div(class="")
-          block sidebar
-            ul(class="")
-              li
-                a(href="/catalog") Home
-              li
-                a(href="/catalog/items") All items
-              li
-                a(href="/catalog/categories") All categories
-              li
-                a(href="/catalog/countries") All countries
-                hr
-              li
-                a(href="/catalog/item/create") Create new item
-              li
-                a(href="/catalog/category/create") Create new category
-              li
-                a(href="/catalog/item/create") Create new item
-        div(class="")
+    div(class="main-wrapper")
+      nav
+        block sidebar
+          ul(class="sidebar-list")
+            li
+              a(href="/catalog") Home
+            li
+              a(href="/catalog/items") All items
+            li
+              a(href="/catalog/categories") All categories
+            li
+              a(href="/catalog/countries") All countries
+            hr
+            li
+              a(href="/catalog/item/create") Create new item
+            li
+              a(href="/catalog/category/create") Create new category
+            li
+              a(href="/catalog/item/create") Create new item
+      section(class="main-body")
+        section(class="banner")
+          div 
+            h1 Coffee by the River
+            img(src="/images/beans.svg" class="beans")
+          a(href="/")
+            img(src="/images/logo.png" class="logo")
+        main
           block content
