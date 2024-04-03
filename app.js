@@ -9,6 +9,15 @@ const catalogRouter = require('./routes/catalog');
 
 const connectionString = require("./public/javascripts/connection");
 
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const dev_db_url = connectionString;
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 const app = express();
 
