@@ -1,0 +1,17 @@
+extends layout
+
+block content 
+    div.content-title
+        div
+            h1=title
+            h2=category.name
+    hr
+    if category_items.length
+        each item in category_items 
+            dt 
+                a.list-item(href=item.url)
+                    p #[strong #{item.name}]
+                    p £#{item.price}0
+            dd=item.description
+    else 
+        p This category has no items!

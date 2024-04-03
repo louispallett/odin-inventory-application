@@ -1,0 +1,25 @@
+extends layout
+
+block content 
+    div.content-title
+        div
+            h1=title
+            h2=country.name
+        div 
+            img(src=country.image_url)
+            h3=country.abbreviation
+    hr
+    if country_items.length
+        each item in country_items 
+            dt 
+                a.list-item(href=item.url)
+                    p #[strong #{item.name}]
+                    p £#{item.price}0
+            dd=item.description
+    else 
+        p This country of origin has no items!
+    hr
+    p
+        a(href=country.url+'/delete') Delete Country
+    p
+        a(href=country.url+'/update') Update Country

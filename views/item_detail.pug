@@ -1,0 +1,26 @@
+extends layout
+
+block content 
+    div.content-title
+        div
+            h1=title
+            h2=item.name
+        div 
+            div #[em Product of]
+            img(src=country_of_origin.image_url)
+            h3=country_of_origin.abbreviation
+    hr
+    p Category: #[strong #{category_of_item.name}]
+    hr
+    div.content-wrapper
+        p=item.description
+        div.stock-wrapper
+            p #[strong Available stock:]
+                if item.stock_number < 6 
+                    p=item.stock_number
+                    p.low-stock Low stock!
+                else 
+                    p=item.stock_number
+        p #[strong Price: £#{item.price}0]
+        if item.strength
+            p #[strong Strength:] #{item.strength}

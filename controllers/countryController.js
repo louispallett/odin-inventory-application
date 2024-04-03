@@ -1,4 +1,5 @@
 const Country = require("../models/country");
+const Item = require("../models/item");
 
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
@@ -14,7 +15,22 @@ exports.country_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific country.
 exports.country_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: country detail: ${req.params.id}`);
+  const [country, itemsInCountries] = await Promise.all([
+    Country.findById(req.params.id).exec(),
+    Item.find({ country_of_origin: req.params.id }).exec(),
+  ]);
+
+  if (country === null) {
+    const err = new Error("Country not found!");
+    err.status = 404;
+    return next();
+  }
+
+  res.render("country_detail", {
+    title: "Country Detail",
+    country: country,
+    country_items:  itemsInCountries,
+  });
 });
 
 // Display country create form on GET.
