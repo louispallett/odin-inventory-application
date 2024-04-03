@@ -1,10 +1,28 @@
+const Category = require("../models/category");
+const Country = require("../models/country")
 const Item = require("../models/item");
 
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Site Home Page");
+  // Get summary of items
+  const [
+    numCategories,
+    numCountries,
+    numItems,
+  ] = await Promise.all([
+    Category.countDocuments({}).exec(),
+    Country.countDocuments({}).exec(),
+    Item.countDocuments({}).exec(),
+  ]);
+
+  res.render("index", {
+    title: "Inventory Home",
+    item_count: numItems,
+    category_count: numCategories,
+    country_count: numCountries
+  })
 });
 
 // Display list of all items.
