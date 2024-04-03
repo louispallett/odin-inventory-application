@@ -58,13 +58,85 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 
 // Display item create form on GET.
 exports.item_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: item create GET");
+  const [allCategories, allCountries] = await Promise.all([
+    Category.find().sort({ name:1 }).exec(),
+    Country.find().sort({ abbreviation:1 }).exec()
+  ]);
+  res.render("item_form", { 
+    title: "Create Item",
+    categories: allCategories,
+    countries: allCountries,
+  });
 });
 
 // Handle item create on POST.
-exports.item_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: item create POST");
-});
+exports.item_create_post = [
+  // If we have an item which is supposed to be an array, we need to convert it here first. Otherwise:
+
+  body("name", "Name must note be empty")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("description", "Description must not be empty and at least 10 characters")
+    .trim()
+    .isLength({ min:10 })
+    .escape(),
+  body("category", "Category must not be empty")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("price", "Price must be a valid price")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("price", "Price must be a valid price")
+    .trim()
+    // .isCurrency({ symbol: "£" })
+    .escape(),
+  body("stock_number", "Available stock must be a valid number")
+    .trim()
+    .isNumeric()
+    .escape(),
+  body("country", "Country must not be empty")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("strength", "Strength must be a valid number")
+    .trim()
+    .isNumeric()
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const item = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      stock_number: req.body.stock_number,
+      country_of_origin: req.body.country,
+      strength: req.body.strength
+    });
+
+    if (!errors.isEmpty()) {
+      const [allCategories, allCountries] = await Promise.all([
+        Category.find().sort({ name:1 }).exec(),
+        Country.find().sort({ abbreviation:1 }).exec()
+      ]);
+
+      res.render("item_form", { 
+        title: "Create Item",
+        categories: allCategories,
+        countries: allCountries,
+        errors: errors.array(),
+      });
+    } else {
+      await item.save();
+      res.redirect(item.url);
+    }
+  })
+]
 
 // Display item delete form on GET.
 exports.item_delete_get = asyncHandler(async (req, res, next) => {

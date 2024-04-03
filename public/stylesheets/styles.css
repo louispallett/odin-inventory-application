@@ -10,7 +10,7 @@ body {
 :root {
     --base-coffee: #6F4E37;
     --base-coffee-hover: #b15717;
-    --shadow: 2px 0 10px rgb(175, 175, 175);
+    --shadow: 3px 3px 3px rgb(175, 175, 175);
     font-size: 1rem;
 }
 
@@ -78,12 +78,61 @@ button {
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 250ms ease-in;
+    margin-top: 10px;
 }
 
-button:hover {
+button:hover,
+button:focus {
+    outline: none;
     cursor: pointer;
     background-color: var(--base-coffee-hover);
     transition: background-color 250ms ease-in;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 900px;
+}
+
+form > div {
+    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(150px, 200px) 1fr;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 2px solid var(--base-coffee);
+    border-radius: 5px;
+    flex: 1 auto;
+    background: none;
+}
+
+select:hover,
+option:hover {
+    cursor: pointer;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: #b157176e;
+    outline: none;
+    transition: background-color 250ms ease-in-out;
 }
 
 .main-wrapper {
@@ -93,10 +142,10 @@ button:hover {
 }
 
 main {
+    padding: 10px 30px;
     max-width: 1200px;
 }
 
-main,
 .banner,
 nav {
     padding: 20px;
@@ -115,7 +164,9 @@ nav > ul {
 
 nav,
 .banner,
-button {
+button,
+input,
+textarea {
     box-shadow: var(--shadow);
 }
 

@@ -1,0 +1,19 @@
+extends layout
+
+block content 
+    div
+        div
+            h1=title
+    hr
+    form(method="POST")
+        div 
+            label(for="name") Category Name: 
+            input#name(placeholder="Ethiopia, United Kingdom, etc." name="name" required value=(undefined===country ? '' : country.name))
+        div 
+            label(for="abbreviation") Three letter abbreviation: 
+            input#abbreviation(placeholder="ETH, GBR, etc." name="abbreviation" required value=(undefined===country ? '' : country.abbreviation))
+        div 
+            label(for="image_url") Flag image url (optional):
+            input#image_url(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="image_url" value=(undefined===country ? '' : country.image_url))
+
+        button(type='submit') Submit
