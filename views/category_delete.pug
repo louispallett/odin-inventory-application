@@ -1,0 +1,31 @@
+extends layout
+
+block content 
+    div.content-title
+        div
+            h1=title
+            h2=category.name
+    hr
+    p Category: #[strong #{category.name}]
+    hr
+    div.content-wrapper
+    if allCategoryItems.length
+        p #[strong The following items are part of this category. You must delete these items OR update them before you can delete this category:]
+        div(style='margin-left:20px;margin-top:20px')
+            h4 Items:
+            dl
+            each item in allCategoryItems
+                dt 
+                    a.list-item(href=`/catalog/item/${item._id}`)
+                        p #[strong #{item.name}]
+                        p £#{item.price}0
+                dd
+    else
+        p Do you really want to delete this category?
+
+        form(method='POST')
+            div.form-group
+                input#categoryid.form-control(type='hidden', name='categoryid', value=category._id )
+            button.btn.btn-primary(type='submit') Delete
+        a(href=`/catalog/category/${category._id}` tabindex='-1')
+            button Back

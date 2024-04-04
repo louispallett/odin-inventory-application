@@ -10,27 +10,27 @@ html(lang="en")
       nav
         block sidebar
           ul(class="sidebar-list")
-            li
-              a(href="/catalog") Home
-            li
-              a(href="/catalog/items") All items
-            li
-              a(href="/catalog/categories") All categories
-            li
-              a(href="/catalog/countries") All countries
+            a(href="/catalog")
+              li Home
+            a(href="/catalog/items")
+              li All items
+            a(href="/catalog/categories")
+              li All categories
+            a(href="/catalog/countries")
+              li All countries
             hr
-            li
-              a(href="/catalog/item/create") Create new item
-            li
-              a(href="/catalog/category/create") Create new category
-            li
-              a(href="/catalog/country/create") Create new country
+            a(href="/catalog/item/create")
+              li Create new item
+            a(href="/catalog/category/create")
+              li Create new category
+            a(href="/catalog/country/create")
+              li Create new country
       section(class="main-body")
         section(class="banner")
           div 
             h1 Coffee by the River
             img(src="/images/beans.svg" class="beans")
-          a(href="/")
+          a(href="/" tabindex='-1')
             img(src="/images/logo.png" class="logo")
         main
           block content

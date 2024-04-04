@@ -1,0 +1,23 @@
+extends layout
+
+block content 
+    div.content-title
+        div
+            h1=title
+            h2=item.name
+        div 
+            div #[em Product of]
+            img(src=country_of_origin.image_url)
+            h3=country_of_origin.abbreviation
+    hr
+    p Category: #[strong #{category_of_item.name}]
+    hr
+    div.content-wrapper
+        p Do you really want to delete this item?
+
+        form(method='POST')
+            div.form-group
+                input#itemid.form-control(type='hidden', name='itemid', value=item._id )
+            button.btn.btn-primary(type='submit') Delete
+        a(href=`/catalog/item/${item._id}` tabindex='-1')
+            button Back

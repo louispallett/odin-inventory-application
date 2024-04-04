@@ -140,12 +140,28 @@ exports.item_create_post = [
 
 // Display item delete form on GET.
 exports.item_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: item delete GET");
+  const item = await Item.findById(req.params.id).exec();
+  const [country_of_item, category_of_item] = await Promise.all([
+    Country.findById(item.country_of_origin).exec(),
+    Category.findById(item.category).exec(),
+  ]);
+
+  if (item === null) {
+    res.redirect("/catalog/items");
+  }
+
+  res.render("item_delete", {
+    title: "Delete Product",
+    item: item,
+    country_of_origin: country_of_item,
+    category_of_item: category_of_item,
+  });
 });
 
 // Handle item delete on POST.
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: item delete POST");
+  await Item.findByIdAndDelete(req.body.itemid);
+  res.redirect("/catalog/items");
 });
 
 // Display item update form on GET.

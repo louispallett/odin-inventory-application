@@ -82,12 +82,40 @@ exports.country_create_post = [
 
 // Display country delete form on GET.
 exports.country_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: country delete GET");
+  const [country, allCountryItems] = await Promise.all([
+    Country.findById(req.params.id).exec(),
+    Item.find({ country_of_origin: req.params.id }),
+  ]);
+
+  if (country === null) {
+    res.redirect("/catalog/countries");
+  }
+
+  res.render("country_delete", {
+    title: "Delete Country",
+    country: country,
+    allCountryItems: allCountryItems,
+  });
 });
 
 // Handle country delete on POST.
 exports.country_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: country delete POST");
+  const [country, allCountryItems] = await Promise.all([
+    Country.findById(req.params.id).exec(),
+    Item.find({ country_of_origin: req.params.id }),
+  ]);
+
+  if (allCountryItems > 0) {
+    res.render("country_delete", {
+      title: "Delete Country",
+      country: country,
+      allCountryItems: allCountryItems,
+    });
+    return;
+  } else {
+    await Country.findByIdAndDelete(req.body.countryid);
+    res.redirect("/catalog/countries");
+  }
 });
 
 // Display country update form on GET.

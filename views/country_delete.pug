@@ -1,0 +1,31 @@
+extends layout
+
+block content 
+    div.content-title
+        div
+            h1=title
+            h2=country.name
+    hr
+    p Country: #[strong #{country.name}]
+    hr
+    div.content-wrapper
+    if allCountryItems.length
+        p #[strong The following items are part of this country. You must delete these items OR update them before you can delete this country:]
+        div(style='margin-left:20px;margin-top:20px')
+            h4 Items:
+            dl
+            each item in allCountryItems
+                dt 
+                    a.list-item(href=`/catalog/item/${item._id}`)
+                        p #[strong #{item.name}]
+                        p £#{item.price}0
+                dd
+    else
+        p Do you really want to delete this country?
+
+        form(method='POST')
+            div.form-group
+                input#countryid.form-control(type='hidden', name='countryid', value=country._id )
+            button.btn.btn-primary(type='submit') Delete
+        a(href=`/catalog/country/${country._id}` tabindex='-1')
+            button Back

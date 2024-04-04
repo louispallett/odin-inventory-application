@@ -24,3 +24,10 @@ block content
         p #[strong Price: £#{item.price}0]
         if item.strength
             p #[strong Strength:] #{item.strength}
+    hr
+    p
+        a(href=item.url+'/delete' tabindex='-1') 
+            button Delete Item
+    p
+        a(href=item.url+'/update' tabindex='-1') 
+            button Update Item

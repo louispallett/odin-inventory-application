@@ -32,27 +32,18 @@ a {
     padding: 0;
 }
 
-nav > ul > li:hover {
+nav > ul > a > li:hover {
     color: #fff;
     background-color: var(--base-coffee);
     cursor: pointer;
-    transition: background-color 350ms ease-in;
+    transition: background-color 350ms ease-in, color 250ms ease-in;
 }
 
-nav > ul > li {
+nav > ul > a > li {
     background-color: none;
-    transition: background-color 350ms ease-in;
+    transition: background-color 350ms ease-in, color 250ms ease-in;
     margin: 5px 0;
-}
-
-nav > ul > li:hover > a {
-    color: #fff;
-    transition: color 250ms ease-in;
-}
-
-nav > ul > li > a {
     color: #000;
-    transition: color 250ms ease-in;
 }
 
 h1 {
