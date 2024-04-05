@@ -5,10 +5,21 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/stylesheets/styles.css")
+    script(type='text/javascript').
+      function showMenu() {
+        const menu = document.querySelector("nav");
+        menu.style.display = "flex";
+      }
+      function closeMenu() {
+        const menu = document.querySelector("nav");
+        menu.style.display = "none";
+      }
   body
+    img.show-menu-btn(src="/images/close.svg" onclick="showMenu()")
     div(class="main-wrapper")
       nav
         block sidebar
+          img.exit-menu-btn(src="/images/close.svg" onclick="closeMenu()")
           ul(class="sidebar-list")
             a(href="/catalog")
               li Home
