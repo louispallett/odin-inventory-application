@@ -120,10 +120,54 @@ exports.country_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display country update form on GET.
 exports.country_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: country update GET");
+  const country = await Country.findById(req.params.id);
+
+  if (country === null) {
+    const err = new Error("Country not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("country_form", {
+    title: "Update Country",
+    country: country,
+  })
 });
 
 // Handle country update on POST.
-exports.country_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: country update POST");
-});
+exports.country_update_post = [
+  body("name", "Country name must contain at least 3 characters")
+    .trim()
+    .isLength({ min: 3 }) 
+    .escape(),
+  body("abbreviation", "Abbreviation must be exactly 3 characters")
+    .trim()
+    .isLength({ min: 3, max: 3})
+    .escape(),
+  body("image_url", "")
+    .trim(),
+    // TODO: This needs more validation (particularly regarding urls... see installed package)
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const country = new Country({
+      name: req.body.name,
+      abbreviation: req.body.abbreviation,
+      image_url: req.body.image_url,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("country_form", {
+        title: "Update Country",
+        country: country,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+        const updatedCountry = await Country.findByIdAndUpdate(req.params.id, country, {});
+        res.redirect(updatedCountry.url);
+    }
+  })
+];

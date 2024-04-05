@@ -58,14 +58,14 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 
 // Display item create form on GET.
 exports.item_create_get = asyncHandler(async (req, res, next) => {
-  const [allCategories, allCountries] = await Promise.all([
+  const [categories, countries] = await Promise.all([
     Category.find().sort({ name:1 }).exec(),
     Country.find().sort({ abbreviation:1 }).exec()
   ]);
   res.render("item_form", { 
     title: "Create Item",
-    categories: allCategories,
-    countries: allCountries,
+    categories: categories,
+    countries: countries,
   });
 });
 
@@ -91,7 +91,6 @@ exports.item_create_post = [
     .escape(),
   body("price", "Price must be a valid price")
     .trim()
-    // .isCurrency({ symbol: "£" })
     .escape(),
   body("stock_number", "Available stock must be a valid number")
     .trim()
@@ -166,10 +165,90 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display item update form on GET.
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: item update GET");
+  const [item, categories, countries] = await Promise.all([
+    Item.findById(req.params.id).populate("category", "country").exec(),
+    Category.find().sort({ name:1 }).exec(),
+    Country.find().sort({ abbreviation:1 }).exec()
+  ]);
+
+  if (item === null) {
+    const err = new Error("Item not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("item_form", { 
+    title: "Update Item",
+    categories: categories,
+    countries: countries,
+    item: item,
+  });
 });
 
 // Handle item update on POST.
-exports.item_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: item update POST");
-});
+exports.item_update_post = [
+  body("name", "Name must note be empty")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("description", "Description must not be empty and at least 10 characters")
+    .trim()
+    .isLength({ min:10 })
+    .escape(),
+  body("category", "Category must not be empty")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("price", "Price must be a valid price")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("price", "Price must be a valid price")
+    .trim()
+    .escape(),
+  body("stock_number", "Available stock must be a valid number")
+    .trim()
+    .isNumeric()
+    .escape(),
+  body("country", "Country must not be empty")
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+  body("strength", "Strength must be a valid number")
+    .trim()
+    .isNumeric()
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const item = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      stock_number: req.body.stock_number,
+      country_of_origin: req.body.country,
+      strength: req.body.strength,
+      _id: req.params.id
+    });
+
+    if (!errors.isEmpty()) {
+      const [item, categories, countries] = await Promise.all([
+        Item.findById(req.params.id).populate("category", "country").exec(),
+        Category.find().sort({ name:1 }).exec(),
+        Country.find().sort({ abbreviation:1 }).exec()
+      ]);
+      res.render("item_form", { 
+        title: "Update Item",
+        categories: categories,
+        countries: countries,
+        item: item,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const updatedItem = await Item.findByIdAndUpdate(req.params.id, item);
+      res.redirect(updatedItem.url);
+    }
+  })
+]

@@ -17,7 +17,7 @@ block content
             input#name(placeholder="Chelbelsa, Classic Green Tea, etc." name="name" required value=(undefined===item ? '' : item.name))
         div 
             label(for="description") Description:
-            textarea#description(placeholder="A really beautiful coffee from the region of..." name="description" min="10" required value=(undefined===item ? '' : item.description))
+            textarea#description(placeholder="A really beautiful coffee from the region of..." name="description" min="10" required)= undefined===item ? '' : item.description
         div 
             label(for="category") Category: 
             select(name="category" required)
@@ -32,7 +32,7 @@ block content
                         option(value=category._id) #{category.name}
         div
             label(for="price") Price (GBP):
-            input#price(type="number" name="price" min="1" step="any" required value=(undefined===item ? '' : item.price))
+            input#price(type="number" name="price" min="1" step="any" required value=(undefined===item ? '' : item.price.toString()))
         div 
             label(for="stock_number") Available Stock:
             input#stock_number(type="number" name="stock_number" required value=(undefined===item ? '' : item.stock_number))
@@ -42,7 +42,7 @@ block content
                 option(value="") --Please select a country--
                 for country in countries
                     if item 
-                        if country._id.toString()===item.country._id.toString()
+                        if country._id.toString()===item.country_of_origin._id.toString()
                             option(value=country._id selected) #{country.name}
                         else 
                             option(value=country._id) #{country.name}
