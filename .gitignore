@@ -1,7 +1,10 @@
 connection.js
 package-lock.json
+
+# TEMP #
 public/images/
 public/javascripts/
+public/fonts/
 
 # Logs
 logs
