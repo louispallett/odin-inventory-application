@@ -86,6 +86,7 @@ async function createCountries() {
         countryCreate(5, "Uganda", "UGA" ,"https://www.svgrepo.com/show/405640/flag-for-flag-uganda.svg"),
         countryCreate(6, "China", "CHN", "https://www.svgrepo.com/show/405448/flag-for-flag-china.svg"),
         countryCreate(7, "Indonesia", "IDN", "https://www.svgrepo.com/show/405511/flag-for-flag-indonesia.svg"),
+        countryCreate(8, "Rwanda", "RWA", "https://www.svgrepo.com/show/405591/flag-for-flag-rwanda.svg")
     ])
 }
 
@@ -96,7 +97,7 @@ async function createItems() {
             "Kyondo", 
             "The Rwanzori mountains are home to around 600 smallholder farms which produce exceptional arabica coffee in a country renowned for the more commercially produced robusta bean.",
             categories[0],
-            13.50,
+            "13.50",
             10,
             countries[5],
             5),
@@ -104,7 +105,7 @@ async function createItems() {
             "Chelbelsa",
             "Chelbesa is one of the finest coffee producing areas within the famous Gedeb Woreda. Known for its dense layered semi-forest vegetation, encompassing false banana trees as well as shade-grown coffee trees, Chelbesa is a great example of excellent coffee growing agro-ecology. The soil In this area is particularly fertile, iron rich, red brown in colour and with high acidity content.",
             categories[0],
-            14.50,
+            "14.50",
             5,
             countries[0],
             6),
@@ -112,7 +113,7 @@ async function createItems() {
             "Chiroso",
             "The term Chiroso refers to the shape of the coffee fruits, which resemble an achira traditional cake from some regions of Colombia. For their part, other experts mention that the name is derived from the word chiro, a Colombian term to refer to a shirt that is stretched or elongated.",
             categories[0],
-            11.50,
+            "11.50",
             12,
             countries[3],
             3),
@@ -120,7 +121,7 @@ async function createItems() {
             "Classic Green Tea",
             "Our Classic Green Tea has been carefully created for all of you starting your green tea journey. A subtle sweetness, hints of spring freshness and a savoury smoothness make this the choice for any tea explorer.",
             categories[1],
-            6.50,
+            "6.50",
             18,
             countries[6],
             false),
@@ -128,9 +129,17 @@ async function createItems() {
             "English Breakfast Tea",
             "Relax with our unique English Breakfast; a lighter, more refined take on Britain’s favourite tea. This luxurious tea is not your average English Breakfast, this is a finer brew, one to bring out when guests come for tea and a piece of rich cake.",
             categories[1],
-            5.50,
+            "5.50",
             21,
             countries[7],
-            false)
+            false),
+        itemCreate(5,
+            "Sholi",
+            "Rwanda is poetically known as &quot;the land of a thousand hills&quot;. the coffee plantations of Sholi coffee washing station are located in the Cyeza Sector of the Muhanga District. The region is known for its diverse fruit farming and ancient rocks called Sebwugugu.",
+            categories[0],
+            "12",
+            10,
+            countries[8],
+            3),
     ]);
 }

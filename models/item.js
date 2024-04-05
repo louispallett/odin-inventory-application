@@ -11,7 +11,7 @@ const ItemSchema = new Schema({
     },
     description: { type: String, minLength: 10, required: true },
     category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
-    price: { type: Number, required: true },
+    price: { type: mongoose.Decimal128, required: true },
     stock_number: { type: Number, required: true },
     country_of_origin: { type: Schema.Types.ObjectId, ref: "Country" },
     strength: { type: Number }
