@@ -4,6 +4,7 @@ const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const isUrlHttp = require("is-url-http");
+const isImageUrl = require('is-image-url');
 
 // Display list of all countries.
 exports.country_list = asyncHandler(async (req, res, next) => {
@@ -51,7 +52,6 @@ exports.country_create_post = [
     .escape(),
   body("image_url", "")
     .trim(),
-    // TODO: This needs more validation (particularly regarding urls... see installed package)
   
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -68,6 +68,12 @@ exports.country_create_post = [
         errors: errors.array(),
       });
       return;
+    } else if (!isUrlHttp(req.body.image_url) || !isImageUrl(req.body.image_url)) {
+      res.render("country_form", {
+        title: "Create Country",
+        country: country,
+        errors: [{ path: "image_url", msg: "Image Url must be a valid HTTP mage URL"}],
+      });
     } else {
       const countryExits = await Country.findOne({ abbreviation: req.body.abbreviation });
       if (countryExits) {
@@ -165,6 +171,12 @@ exports.country_update_post = [
         errors: errors.array(),
       });
       return;
+    } else if (!isUrlHttp(req.body.image_url) || !isImageUrl(req.body.image_url)) {
+      res.render("country_form", {
+        title: "Update Country",
+        country: country,
+        errors: [{ path: "image_url", msg: "Image Url must be a valid HTTP image URL"}],
+      });
     } else {
         const updatedCountry = await Country.findByIdAndUpdate(req.params.id, country, {});
         res.redirect(updatedCountry.url);
