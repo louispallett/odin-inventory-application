@@ -3,7 +3,8 @@ extends layout
 block content 
     h1=title
     hr
-    p #[b Click] on an category to show all items associated with that category.
+    div.paragraph-wrapper
+        p #[b Click] on an category to show all items associated with that category.
     div(class="content-wrapper")
         if category_list.length 
             each category in category_list

@@ -20,7 +20,7 @@ block content
                 label(for="abbreviation") Three letter abbreviation: 
                 input#abbreviation(placeholder="ETH, GBR, etc." name="abbreviation" required value=(undefined===country ? '' : country.abbreviation))
             div 
-                label(for="image_url") Flag image url (optional):
+                label(for="image_url") Flag image url:
                 input#image_url(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="image_url" value=(undefined===country ? '' : country.image_url))
             button(type='submit') Submit
         div.form-info-wrapper

@@ -3,7 +3,8 @@ extends layout
 block content 
     h1=title
     hr
-    p #[b Click] on an item to show all items associated in it!
+    div.paragraph-wrapper
+        p #[b Click] on an item to show all items associated in it!
     div(class="content-wrapper")
     if item_list.length 
         each item in item_list

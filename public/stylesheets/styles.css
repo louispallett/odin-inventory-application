@@ -16,6 +16,7 @@ body {
 }
 
 h1 {
+    font-family: "coffee-txt", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 2.5rem;
 }
 
@@ -163,6 +164,25 @@ main {
 .banner,
 nav {
     padding: 20px;
+}
+
+span {
+    position: relative;
+    bottom: 15px;
+    color: var(--base-coffee);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.paragraph-wrapper {
+    background-color: var(--input-background);
+    border: 2px solid var(--base-coffee);
+    border-radius: 5px;
+}
+
+.paragraph-wrapper > p {
+    margin: 0;
+    padding: 10px;
 }
 
 /* SIDEBAR */
@@ -336,18 +356,25 @@ textarea {
     margin: 0;
 }
 
-.coffee-splash {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 3em;
+.radio {
+    display: flex;
+    justify-content: space-around;
 }
 
-@keyframes bounce {
-    100% {
-      transform:translateY(-5px);
-    }
-}  
+input[type="radio"] {
+    margin: 0 10px;
+    height: 1em;
+    /* border: 2px solid var(--base-coffee); */
+}
+
+.radio > div > input,
+.radio > div > label {
+    cursor: pointer;
+}
+
+.radio > div {
+    animation: fade 1.3s ease forwards;
+}
 
 @keyframes fade {
     0% {

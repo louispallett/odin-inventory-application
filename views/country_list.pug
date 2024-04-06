@@ -4,7 +4,8 @@ block content
     div(class="content-title")
         h1=title
     hr
-    p #[b Click] on a country to show a list of items sold from there.
+    div.paragraph-wrapper
+        p #[b Click] on a country to show a list of items sold from there.
     div(class="content-wrapper")
         if country_list.length 
             each country in country_list

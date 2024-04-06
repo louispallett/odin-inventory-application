@@ -100,10 +100,6 @@ exports.item_create_post = [
     .trim()
     .isLength({ min:1 })
     .escape(),
-  body("strength", "Strength must be a valid number")
-    .trim()
-    .isNumeric()
-    .escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -213,10 +209,6 @@ exports.item_update_post = [
   body("country", "Country must not be empty")
     .trim()
     .isLength({ min:1 })
-    .escape(),
-  body("strength", "Strength must be a valid number")
-    .trim()
-    .isNumeric()
     .escape(),
 
   asyncHandler(async (req, res, next) => {

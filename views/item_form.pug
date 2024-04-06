@@ -50,8 +50,32 @@ block content
                         else
                             option(value=country._id) #{country.name}
             div 
-                label(for="strength") Strength (Optional):
-                input#strength(type="number" name="strength" value=(undefined===item ? '' : item.strength))
+                div 
+                    p #[b Strength]
+                    span optional
+                div.radio
+                    div
+                        input(type="radio" id="one" name="strength" value="1")
+                        label(for="one") 1
+                    div
+                        input(type="radio" id="two" name="strength" value="2")
+                        label(for="two") 2
+                    div
+                        input(type="radio" id="three" name="strength" value="3")
+                        label(for="three") 3
+                    div
+                        input(type="radio" id="four" name="strength" value="4")
+                        label(for="four") 4
+                    div
+                        input(type="radio" id="five" name="strength" value="5")
+                        label(for="five") 5
+                    div
+                        input(type="radio" id="six" name="strength" value="6")
+                        label(for="six") 6
+                    div
+                        input(type="radio" id="seven" name="strength" value="7")
+                        label(for="seven") 7
+                //- input#strength(type="number" name="strength" value=(undefined===item ? '' : item.strength))
             button(type="submit") Submit
         div.form-info-wrapper
             div
