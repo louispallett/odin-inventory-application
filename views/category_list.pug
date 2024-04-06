@@ -3,6 +3,7 @@ extends layout
 block content 
     h1=title
     hr
+    p #[b Click] on an item to show all information about it, including it's country of origin and category.
     div(class="content-wrapper")
         if category_list.length 
             each category in category_list

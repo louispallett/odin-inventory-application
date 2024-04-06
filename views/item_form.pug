@@ -11,45 +11,56 @@ block content
         for error in errors
             p!= error.msg
         hr
-    form(method="POST")
-        div 
-            label(for="name") Item Name: 
-            input#name(placeholder="Chelbelsa, Classic Green Tea, etc." name="name" required value=(undefined===item ? '' : item.name))
-        div 
-            label(for="description") Description:
-            textarea#description(placeholder="A really beautiful coffee from the region of..." name="description" min="10" required)= undefined===item ? '' : item.description
-        div 
-            label(for="category") Category: 
-            select(name="category" required)
-                option(value="") --Please select a category--
-                for category in categories
-                    if item 
-                        if category._id.toString()===item.category._id.toString()
-                            option(value=category._id selected) #{category.name}
-                        else 
+    div.form-area
+        form(method="POST")
+            div 
+                label(for="name") Item Name: 
+                input#name(placeholder="Chelbelsa, Classic Green Tea, etc." name="name" required value=(undefined===item ? '' : item.name))
+            div 
+                label(for="description") Description:
+                textarea#description(placeholder="A really beautiful coffee from the region of..." name="description" min="10" required)= undefined===item ? '' : item.description
+            div 
+                label(for="category") Category: 
+                select(name="category" required)
+                    option(value="") --Please select a category--
+                    for category in categories
+                        if item 
+                            if category._id.toString()===item.category._id.toString()
+                                option(value=category._id selected) #{category.name}
+                            else 
+                                option(value=category._id) #{category.name}
+                        else
                             option(value=category._id) #{category.name}
-                    else
-                        option(value=category._id) #{category.name}
-        div
-            label(for="price") Price (GBP):
-            input#price(type="number" name="price" min="1" step="any" required value=(undefined===item ? '' : item.price.toString()))
-        div 
-            label(for="stock_number") Available Stock:
-            input#stock_number(type="number" name="stock_number" required value=(undefined===item ? '' : item.stock_number))
-        div 
-            label(for="country") Country of Origin: 
-            select(name="country" required)
-                option(value="") --Please select a country--
-                for country in countries
-                    if item 
-                        if country._id.toString()===item.country_of_origin._id.toString()
-                            option(value=country._id selected) #{country.name}
-                        else 
+            div
+                label(for="price") Price (GBP):
+                input#price(type="number" name="price" min="1" step="any" required value=(undefined===item ? '' : item.price.toString()))
+            div 
+                label(for="stock_number") Available Stock:
+                input#stock_number(type="number" name="stock_number" required value=(undefined===item ? '' : item.stock_number))
+            div 
+                label(for="country") Country of Origin: 
+                select(name="country" required)
+                    option(value="") --Please select a country--
+                    for country in countries
+                        if item 
+                            if country._id.toString()===item.country_of_origin._id.toString()
+                                option(value=country._id selected) #{country.name}
+                            else 
+                                option(value=country._id) #{country.name}
+                        else
                             option(value=country._id) #{country.name}
-                    else
-                        option(value=country._id) #{country.name}
-        div 
-            label(for="strength") Strength (Optional):
-            input#strength(type="number" name="strength" value=(undefined===item ? '' : item.strength))
-
-        button(type="submit") Submit
+            div 
+                label(for="strength") Strength (Optional):
+                input#strength(type="number" name="strength" value=(undefined===item ? '' : item.strength))
+            button(type="submit") Submit
+        div.form-info-wrapper
+            div
+                p A good description is both informative and inviting!
+            div 
+                p Can't see a category you want listed? Why not 
+                    a(href="/catalog/category/create") #[em create one]
+                    |? You can then come back here and select it!
+            div 
+                p Can't see a country you want listed? Why not 
+                    a(href="/catalog/country/create") #[em create one]
+                    |? You can then come back here and select it!

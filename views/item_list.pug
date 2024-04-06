@@ -3,16 +3,17 @@ extends layout
 block content 
     h1=title
     hr
+    p #[b Click] on an item to show all items associated in it!
     div(class="content-wrapper")
     if item_list.length 
         each item in item_list
             a(href=item.url class="list-item")
                 p #[strong #{item.name}]
                 div(style="border-left:2px solid #6F4E37;height:1rem")
-                p #[strong Available stock:]
+                p #[strong Stock:]
                 if item.stock_number < 6 
                     p=item.stock_number
-                    p(class="low-stock") Low stock!
+                    p(class="low-stock") Low!
                 else 
                     p=item.stock_number
     else 

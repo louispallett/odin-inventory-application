@@ -10,6 +10,9 @@ block content
   p The inventory has the following record counts:
 
   ul
-    li #[strong Categories:] !{category_count}
-    li #[strong Countries:] !{country_count}
-    li #[strong Items:] !{item_count}
+    a(href="/catalog/categories")
+      li.list-item #[strong Categories:] !{category_count}
+    a(href="/catalog/countries")
+      li.list-item #[strong Countries:] !{country_count}
+    a(href="/catalog/items")
+      li.list-item #[strong Items:] !{item_count}

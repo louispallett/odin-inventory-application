@@ -5,8 +5,14 @@ block content
         div
             h1=title
     hr
-    form(method="POST")
-        div 
-            label(for="name") Category Name: 
-            input#name(placeholder="Coffee, Tea, etc." name="name" required value=(undefined===category ? '' : category.name))
-        button(type='submit') Submit
+    div.form-area
+        form(method="POST")
+            div 
+                label(for="name") Category Name: 
+                input#name(placeholder="Coffee, Tea, etc." name="name" required value=(undefined===category ? '' : category.name))
+            button(type='submit') Submit
+        div.form-info-wrapper
+            div
+                p Category names should be general and not too specific! Take a full list of our current categories 
+                    a(href="/catalog/categories") here
+                    |.

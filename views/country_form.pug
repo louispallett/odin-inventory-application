@@ -5,15 +5,30 @@ block content
         div
             h1=title
     hr
-    form(method="POST")
-        div 
-            label(for="name") Category Name: 
-            input#name(placeholder="Ethiopia, United Kingdom, etc." name="name" required value=(undefined===country ? '' : country.name))
-        div 
-            label(for="abbreviation") Three letter abbreviation: 
-            input#abbreviation(placeholder="ETH, GBR, etc." name="abbreviation" required value=(undefined===country ? '' : country.abbreviation))
-        div 
-            label(for="image_url") Flag image url (optional):
-            input#image_url(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="image_url" value=(undefined===country ? '' : country.image_url))
-
-        button(type='submit') Submit
+    if errors
+        p(style="color:red") #[strong Your form had some errors in!] Please address the following and resubmit:
+        ul
+        for error in errors
+            p!= error.msg
+        hr
+    div.form-area
+        form(method="POST")
+            div 
+                label(for="name") Category Name: 
+                input#name(placeholder="Ethiopia, United Kingdom, etc." name="name" required value=(undefined===country ? '' : country.name))
+            div 
+                label(for="abbreviation") Three letter abbreviation: 
+                input#abbreviation(placeholder="ETH, GBR, etc." name="abbreviation" required value=(undefined===country ? '' : country.abbreviation))
+            div 
+                label(for="image_url") Flag image url (optional):
+                input#image_url(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="image_url" value=(undefined===country ? '' : country.image_url))
+            button(type='submit') Submit
+        div.form-info-wrapper
+            div
+                p Each country has a unique three letter abbreviation. Take a look at a complete list 
+                    a(href="https://www.iban.com/country-codes") here
+                    |.
+            div 
+                p You can find images by looking up svg files on 
+                    a(href="https://www.svgrepo.com/collection/twemoji-emojis/4?search=flag") SVG Repo 
+                    | and you can open an image in a seperate page and past the URL here!

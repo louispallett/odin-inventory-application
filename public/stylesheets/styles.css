@@ -11,6 +11,7 @@ body {
     --base-coffee: #6F4E37;
     --base-coffee-hover: #b15717;
     --shadow: 3px 3px 3px rgb(175, 175, 175);
+    --input-background: #b157176e;
     font-size: 1rem;
 }
 
@@ -24,6 +25,17 @@ h3 {
 
 p {
     font-size: 1.1rem;
+}
+
+p > a {
+    color: var(--base-coffee);
+    font-weight: bold;
+    transition: color 250ms ease-in;
+}
+
+p > a:hover {
+    color: var(--base-coffee-hover);
+    transition: color 250ms ease-in;
 }
 
 a {
@@ -46,8 +58,20 @@ nav > ul > a > li {
     color: #000;
 }
 
-h1 {
-    animation: fade 1s ease forwards;
+h1,
+button {
+    animation: fade 800ms ease forwards;
+}
+
+.list-item,
+input,
+textarea,
+select {
+    animation: fade 1.3s ease forwards;
+}
+
+.form-info-wrapper {
+    animation: fade 1.6s ease-out forwards;
 }
 
 ul {
@@ -121,7 +145,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-    background-color: #b157176e;
+    background-color: var(--input-background);
     outline: none;
     transition: background-color 250ms ease-in-out;
 }
@@ -129,7 +153,6 @@ textarea:focus {
 .main-wrapper {
     display: grid;
     grid-template-columns: minmax(200px, 1fr) minmax(400px, 5fr);
-    /* height: 100vh; */
 }
 
 main {
@@ -152,6 +175,7 @@ nav {
     height: 2em;
     background-color: var(--base-coffee);
     transition: background-color 250ms ease-in;
+    z-index: 1;
 }
 
 .show-menu-btn:hover,
@@ -174,6 +198,7 @@ nav {
 nav {
     background-color: #ebebeba8;
     flex-direction: column;
+    height: 100vh;
 }
 
 nav > ul {
@@ -190,11 +215,6 @@ textarea {
 }
 
 /* MAIN BODY */
-
-.main-body {
-    display: grid;
-    grid-template-rows: minmax(100px, 1fr) 6fr;
-}
 
 /* BANNER */
 
@@ -215,9 +235,13 @@ textarea {
     gap: 20px;
 }
 
+.title {
+    font-family: "coffee-txt", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 3rem;
+}
+
 .beans {
     height: 5rem;
-    animation: rotate 3s linear infinite;
 }
 
 .logo {
@@ -260,12 +284,14 @@ textarea {
     margin: 5px;
     border-radius: 10px;
     background-color: none;
-    transition: background-color 350ms ease-in;
+    color: #000;
+    transition: background-color 350ms ease-in, color 250ms ease-in;
 }
 
 .list-item:hover {
     background-color: var(--base-coffee);
-    transition: background-color 350ms ease-in;
+    color: #fff;
+    transition: background-color 350ms ease-in, color 250ms ease-in;
 }
 
 .list-item > img {
@@ -287,6 +313,36 @@ textarea {
     animation: bounce .4s ease 8 alternate;
 }
 
+.form-area {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.form-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-info-wrapper > div {
+    border: 2px solid var(--base-coffee);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px 10px;
+    background-color: var(--input-background);
+}
+
+.form-info-wrapper > div > p {
+    margin: 0;
+}
+
+.coffee-splash {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 3em;
+}
+
 @keyframes bounce {
     100% {
       transform:translateY(-5px);
@@ -295,11 +351,11 @@ textarea {
 
 @keyframes fade {
     0% {
-      transform: translateY(-40px);
+      transform: translateX(40px);
       opacity: .4;
     }
     100% {
-      transform: translateY(0);
+      transform: translateX(0);
       opacity: 1;
     }
 }
@@ -325,7 +381,7 @@ textarea {
     }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 900px) {
     nav {
         display: none;
         position: fixed;
@@ -347,8 +403,54 @@ textarea {
     }
 }
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 901px) {
     nav {
         display: block !important;
     }
+}
+
+@media only screen and (max-width: 750px) {
+    .form-area {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-info-wrapper {
+        margin: 20px 0;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .title {
+        font-size: 2rem;
+        margin-top: 10px;
+    }
+
+    form > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px
+    }
+
+    input, textarea, select {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .logo {
+        display: none;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@font-face {
+    font-family: "coffee-txt";
+    src: 
+        url("../fonts/coffee-txt.woff2") format(".woff2"),
+        url("../fonts/coffee-txt.woff") format("woff");
 }
