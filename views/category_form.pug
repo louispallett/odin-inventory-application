@@ -5,6 +5,12 @@ block content
         div
             h1=title
     hr
+    if errors
+        p(style="color:red") #[strong Your form had some errors in!] Please address the following and resubmit:
+        ul
+        for error in errors
+            p!= error.msg
+        hr
     div.form-area
         form(method="POST")
             div 
