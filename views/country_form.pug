@@ -21,7 +21,7 @@ block content
                 input#abbreviation(placeholder="ETH, GBR, etc." name="abbreviation" required value=(undefined===country ? '' : country.abbreviation))
             div 
                 label.custom-file-upload(for="flag_img") Upload flag image svg file
-                    input#flag_img(type="file" name="flag_img" accept="image/*")
+                    input#flag_img(type="file" name="flag_img" accept="image/*" required)
                 //- div
                 div.form-info-wrapper
                     div
