@@ -16,6 +16,7 @@ const CountrySchema = new Schema({
         maxLength: 3,
     },
     image_url: { type: String },
+    cloudinary_id: { type: String },
 });
 
 CountrySchema.virtual("url").get(function() {

@@ -62,6 +62,7 @@ exports.country_create_post = [
       name: req.body.name,
       abbreviation: req.body.abbreviation,
       image_url: "",
+      cloudinary_id: "",
     });
 
     if (!errors.isEmpty()) {
@@ -87,6 +88,7 @@ exports.country_create_post = [
     await unlinkFile(req.file.path);
 
     country.image_url = result.secure_url;
+    country.cloudinary_id = result.public_id;
 
     await country.save();
     res.redirect(country.url);
@@ -125,11 +127,13 @@ exports.country_delete_post = asyncHandler(async (req, res, next) => {
       allCountryItems: allCountryItems,
     });
     return;
-  } else {
-    await Country.findByIdAndDelete(req.body.countryid);
-    res.redirect("/catalog/countries");
   }
-});
+  const deletedItem = await Country.findByIdAndDelete(req.body.countryid);
+  if (deletedItem && deletedItem.cloudinary_id) {
+    await cloudinary.uploader.destroy(deletedItem.cloudinary_id);
+  }
+  res.redirect("/catalog/countries");
+  });
 
 // Display country update form on GET.
 exports.country_update_get = asyncHandler(async (req, res, next) => {
