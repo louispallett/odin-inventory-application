@@ -54,18 +54,18 @@ exports.category_create_post = [
         title: "Create Category",
         category: category,
         errors: errors.array(),
-      })
+      });
       return;
-    } else {
-      const categoryExists = await Category.findOne({ name: req.body.name });
-      if (categoryExists) {
-        res.redirect(categoryExists.url);
-      } else {
-        await category.save();
-        res.redirect(category.url);
-      }
     }
-  })
+
+    const categoryExists = await Category.findOne({ name: req.body.name });
+    if (categoryExists) {
+      res.redirect(categoryExists.url);
+      return;
+    }
+    await category.save();
+    res.redirect(category.url);
+  }),
 ];
 
 // Display category delete form on GET.
@@ -100,10 +100,9 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
       allCategoryItems: allCategoryItems,
     });
     return;
-  } else {
-    await Category.findByIdAndDelete(req.body.categoryid);
-    res.redirect("/catalog/categories");
-  }
+  } 
+  await Category.findByIdAndDelete(req.body.categoryid);
+  res.redirect("/catalog/categories");
 });
 
 // Display category update form on GET.
@@ -144,16 +143,15 @@ exports.category_update_post = [
         errors: errors.array(),
       })
       return;
-    } else {
-      const categoryExists = await Category.findOne({ name: req.body.name })
-        .collation({ locale: "en", strength: 2 })
-        .exec();
-      if (categoryExists) {
-        res.redirect(categoryExists.url);
-      } else {
-        const updatedCategory = await Category.findByIdAndUpdate(req.params.id, category, {});
-        res.redirect(updatedCategory.url);
-      }
     }
-  })
-]
+    const categoryExists = await Category.findOne({ name: req.body.name })
+      .collation({ locale: "en", strength: 2 })
+      .exec();
+    if (categoryExists) {
+      res.redirect(categoryExists.url);
+      return;
+    }
+    const updatedCategory = await Category.findByIdAndUpdate(req.params.id, category, {});
+    res.redirect(updatedCategory.url);
+  }),
+];

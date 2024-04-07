@@ -126,12 +126,12 @@ exports.item_create_post = [
         countries: allCountries,
         errors: errors.array(),
       });
-    } else {
-      await item.save();
-      res.redirect(item.url);
+      return;
     }
-  })
-]
+    await item.save();
+    res.redirect(item.url);
+  }),
+];
 
 // Display item delete form on GET.
 exports.item_delete_get = asyncHandler(async (req, res, next) => {
@@ -238,9 +238,8 @@ exports.item_update_post = [
         errors: errors.array(),
       });
       return;
-    } else {
-      const updatedItem = await Item.findByIdAndUpdate(req.params.id, item);
-      res.redirect(updatedItem.url);
     }
-  })
-]
+    const updatedItem = await Item.findByIdAndUpdate(req.params.id, item);
+    res.redirect(updatedItem.url);
+  }),
+];
