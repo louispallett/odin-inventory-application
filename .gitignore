@@ -5,6 +5,8 @@ public/javascripts/
 # TEMP #
 public/images/
 public/fonts/
+# TEMP - we need to figure out a way of 
+public/uploads 
 
 # Logs
 logs
