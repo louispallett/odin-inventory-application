@@ -6,6 +6,8 @@ const item_controller = require("../controllers/itemController");
 const category_controller = require("../controllers/categoryController");
 const country_controller = require("../controllers/countryController");
 
+const upload = require("../public/javascripts/multer"); 
+
 /// ITEM ROUTES ///
 
 // GET catalog home page.
@@ -67,7 +69,7 @@ router.get("/categories", category_controller.category_list);
 router.get("/country/create", country_controller.country_create_get);
 
 //POST request for creating Genre.
-router.post("/country/create", country_controller.country_create_post);
+router.post("/country/create", upload.single("flag_img"), country_controller.country_create_post);
 
 // GET request to delete Genre.
 router.get("/country/:id/delete", country_controller.country_delete_get);

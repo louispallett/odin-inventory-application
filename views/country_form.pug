@@ -12,7 +12,7 @@ block content
             p!= error.msg
         hr
     div.form-area
-        form(method="POST")
+        form(method="POST" enctype="multipart/form-data")
             div 
                 label(for="name") Category Name: 
                 input#name(placeholder="Ethiopia, United Kingdom, etc." name="name" required value=(undefined===country ? '' : country.name))
@@ -20,15 +20,19 @@ block content
                 label(for="abbreviation") Three letter abbreviation: 
                 input#abbreviation(placeholder="ETH, GBR, etc." name="abbreviation" required value=(undefined===country ? '' : country.abbreviation))
             div 
-                label(for="image_url") Flag image url:
-                input#image_url(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="image_url" value=(undefined===country ? '' : country.image_url))
+                label.custom-file-upload(for="flag_img") Upload flag image svg file
+                    input#flag_img(type="file" name="flag_img" accept="image/*")
+                //- div
+                div.form-info-wrapper
+                    div
+                        p You can find images by looking up svg files on 
+                            a(href="https://www.svgrepo.com/collection/twemoji-emojis/4?search=flag") SVG Repo 
+                            | and you can open an image in a seperate page and past the URL here!
+
+                //- input#flag_img(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="flag_img" value=(undefined===country ? '' : country.flag_img))
             button(type='submit') Submit
         div.form-info-wrapper
-            div
+            div 
                 p Each country has a unique three letter abbreviation. Take a look at a complete list 
                     a(href="https://www.iban.com/country-codes") here
                     |.
-            div 
-                p You can find images by looking up svg files on 
-                    a(href="https://www.svgrepo.com/collection/twemoji-emojis/4?search=flag") SVG Repo 
-                    | and you can open an image in a seperate page and past the URL here!

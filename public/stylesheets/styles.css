@@ -67,7 +67,8 @@ button {
 .list-item,
 input,
 textarea,
-select {
+select,
+.custom-file-upload {
     animation: fade 1.3s ease forwards;
 }
 
@@ -85,16 +86,21 @@ li {
     border-radius: 10px;
 }
 
-button {
+button,
+.custom-file-upload {
     background-color: var(--base-coffee);
     border: none;
     color: #fff;
-    font-size: 1.2rem;
-    padding: 10px 20px;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 250ms ease-in;
+}
+
+button {
     margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+
 }
 
 button:hover,
@@ -126,11 +132,10 @@ label {
 input,
 select,
 textarea {
-    padding: 5px 10px;
     font-size: 1rem;
-    border: 2px solid var(--base-coffee);
     border-radius: 5px;
-    flex: 1 auto;
+    padding: 5px 10px;
+    border: 2px solid var(--base-coffee);
     background: none;
 }
 
@@ -183,6 +188,23 @@ span {
 .paragraph-wrapper > p {
     margin: 0;
     padding: 10px;
+}
+
+input[type="file"] {
+    /* display: none; */
+}
+
+.custom-file-upload {
+    transition: background-color 250ms ease-in;
+    background-color: var(--base-coffee);
+    color: #fff;
+}
+
+.custom-file-upload:focus,
+.custom-file-upload:hover {
+    cursor: pointer;
+    background-color: var(--base-coffee-hover);
+    transition: background-color 250ms ease-in;
 }
 
 /* SIDEBAR */
@@ -328,9 +350,12 @@ textarea {
 }
 
 .low-stock {
-    color: red;
+    background-color: #ff0000;
+    padding: 0 5px;
+    border-radius: 5px;
+    color: #fff;
     font-weight: bold;
-    animation: bounce .4s ease 8 alternate;
+    animation: bounce .4s ease-out 6 alternate;
 }
 
 .form-area {
@@ -346,10 +371,14 @@ textarea {
 
 .form-info-wrapper > div {
     border: 2px solid var(--base-coffee);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0px 10px;
     background-color: var(--input-background);
+}
+
+.custom-file-upload,
+.form-info-wrapper > div {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 .form-info-wrapper > div > p {
@@ -374,6 +403,12 @@ input[type="radio"] {
 
 .radio > div {
     animation: fade 1.3s ease forwards;
+}
+
+@keyframes bounce {
+    100% {
+      transform:translateY(-20px);
+    }
 }
 
 @keyframes fade {

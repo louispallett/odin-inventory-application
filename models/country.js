@@ -15,7 +15,7 @@ const CountrySchema = new Schema({
         minLength: 3,
         maxLength: 3,
     },
-    image_url: { type: String }
+    image_url: { type: String },
 });
 
 CountrySchema.virtual("url").get(function() {
