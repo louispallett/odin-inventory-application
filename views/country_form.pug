@@ -22,14 +22,11 @@ block content
             div 
                 label.custom-file-upload(for="flag_img") Upload flag image svg file
                     input#flag_img(type="file" name="flag_img" accept="image/*" required)
-                //- div
                 div.form-info-wrapper
                     div
                         p You can find images by looking up svg files on 
                             a(href="https://www.svgrepo.com/collection/twemoji-emojis/4?search=flag") SVG Repo 
                             | and you can open an image in a seperate page and past the URL here!
-
-                //- input#flag_img(placeholder="https://www.svgrepo.com/show/405478/flag-for-flag-ethiopia.svg" name="flag_img" value=(undefined===country ? '' : country.flag_img))
             button(type='submit') Submit
         div.form-info-wrapper
             div 

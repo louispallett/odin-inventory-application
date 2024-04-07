@@ -3,9 +3,10 @@ const Item = require("../models/item");
 
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
-// const isUrlHttp = require("is-url-http");
-// const isImageUrl = require('is-image-url');
 const cloudinary = require("../public/javascripts/cloudinary");
+const fs = require('fs');
+const util = require('util');
+const unlinkFile = util.promisify(fs.unlink);
 
 // Display list of all countries.
 exports.country_list = asyncHandler(async (req, res, next) => {
@@ -57,33 +58,17 @@ exports.country_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     
+    const country = new Country({ 
+      name: req.body.name,
+      abbreviation: req.body.abbreviation,
+      image_url: "",
+    });
+
     if (!errors.isEmpty()) {
       res.render("country_form", {
         title: "Create Country",
         country: country,
         errors: errors.array(),
-      });
-      return;
-    }
-
-    let country;
-    
-    //  Check for image upload:
-    if (req.file) { // if file exists
-      const result = await cloudinary.uploader.upload(req.file.path, { folder: "flags" }, (error, result) => {
-        console.log(error, result);
-      });
-      
-      country = new Country({ 
-        name: req.body.name,
-        abbreviation: req.body.abbreviation,
-        image_url: result.secure_url,
-      });
-    } else {
-      res.render("country_form", {
-        title: "Create Country",
-        country: country,
-        errors: [{ path: "image_url", msg: "Image is required"}],
       });
       return;
     }
@@ -93,6 +78,16 @@ exports.country_create_post = [
       res.redirect(countryExits.url);
       return;
     }
+
+    //  Check for image upload:
+    const result = await cloudinary.uploader.upload(req.file.path, { folder: "flags" }, (error, result) => {
+      console.log(error, result);
+    });
+
+    await unlinkFile(req.file.path);
+
+    country.image_url = result.secure_url;
+
     await country.save();
     res.redirect(country.url);
   }),
