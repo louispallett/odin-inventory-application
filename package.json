@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "cloudinary": "^2.1.0",
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
     "http-errors": "~1.6.3",
     "is-image-url": "^1.1.8",
     "is-url-http": "^2.3.8",

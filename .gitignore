@@ -1,14 +1,9 @@
-connection.js
+public/javascripts/connection.js
 package-lock.json
 public/javascripts/cloud_management.js
 public/javascripts/cloudinary.js
-public/javascripts/cloud_management.js
 
-# TEMP #
-public/images/
-public/fonts/
-# TEMP - we need to figure out a way of 
-public/uploads 
+public/
 
 # Logs
 logs
