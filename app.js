@@ -11,9 +11,8 @@ const RateLimit = require("express-rate-limit");
 const indexRouter = require('./routes/index');
 const catalogRouter = require('./routes/catalog');
 
-const dev_uri = require("./public/javascripts/connection")
 mongoose.set("strictQuery", false);
-const mongoDB = process.env.MONGODB_URI || dev_uri;
+const mongoDB = process.env.MONGODB_URI;
 
 main().catch((err) => console.log(err));
 async function main() {

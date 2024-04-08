@@ -1,9 +1,6 @@
 public/javascripts/connection.js
 package-lock.json
 public/javascripts/cloud_management.js
-public/javascripts/cloudinary.js
-
-public/
 
 # Logs
 logs
