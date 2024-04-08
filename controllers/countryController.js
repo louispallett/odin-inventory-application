@@ -65,6 +65,9 @@ exports.country_create_post = [
       cloudinary_id: "",
     });
 
+    country.name = replaceEncodedCharacters(country.name);
+    country.abbreviation = replaceEncodedCharacters(country.abbreviation);
+
     if (!errors.isEmpty()) {
       res.render("country_form", {
         title: "Create Country",

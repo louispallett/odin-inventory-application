@@ -5,6 +5,8 @@ const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
+const replaceEncodedCharacters = require("../public/javascripts/encodedChar");
+
 exports.index = asyncHandler(async (req, res, next) => {
   // Get summary of items
   const [
@@ -113,6 +115,9 @@ exports.item_create_post = [
       country_of_origin: req.body.country,
       strength: req.body.strength
     });
+
+    item.name = replaceEncodedCharacters(item.name);
+    item.description = replaceEncodedCharacters(item.description);
 
     if (!errors.isEmpty()) {
       const [allCategories, allCountries] = await Promise.all([
@@ -223,6 +228,9 @@ exports.item_update_post = [
       strength: req.body.strength,
       _id: req.params.id
     });
+
+    item.name = replaceEncodedCharacters(item.name);
+    item.description = replaceEncodedCharacters(item.description);
 
     if (!errors.isEmpty()) {
       const [item, categories, countries] = await Promise.all([

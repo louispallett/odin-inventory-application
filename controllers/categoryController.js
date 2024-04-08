@@ -4,6 +4,8 @@ const Item = require("../models/item");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
+const replaceEncodedCharacters = require("../public/javascripts/encodedChar");
+
 // Display list of all categories.
 exports.category_list = asyncHandler(async (req, res, next) => {
   const allCategories = await Category.find().sort({ name:1 }).exec();
@@ -48,6 +50,7 @@ exports.category_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     const category = new Category({ name: req.body.name });
+    category.name = replaceEncodedCharacters(category.name);
 
     if (!errors.isEmpty()) {
       res.render("category_form", {
@@ -135,6 +138,8 @@ exports.category_update_post = [
       name: req.body.name,
       _id: req.params.id, // Without this line mongoose won't let you update record
     });
+
+    category.name = replaceEncodedCharacters(category.name);
 
     if (!errors.isEmpty()) {
       res.render("category_form", {
