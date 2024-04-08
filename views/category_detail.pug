@@ -7,6 +7,8 @@ block content
             h2=category.name
     hr
     if category_items.length
+        div.paragraph-wrapper
+            p #[b Click] on an item to show information about it's price, stock, etc.
         each item in category_items 
             dt 
                 a.list-item(href=item.url)

@@ -6,13 +6,13 @@ block content
     p Welcome to the #[em Coffee by the River] Inventory, a basic Express website developed by LowPal as part of The Odin Project's NodeJS course.
     p You will find lists of countries, categories, and items in the sidebar on the left. You can also #[strong create] new ones by clicking on the links underneath (i.e. "Create new item").
     p If you need to #[strong update] something, navigate to the record you wish to update and click #[em Update] at the bottom of the page. 
-  h1 Dynamic content
+  h2
   div.paragraph-wrapper
-    p The inventory has the following record counts:
-  ul
-    a(href="/catalog/categories")
-      li.list-item #[strong Categories:] !{category_count}
-    a(href="/catalog/countries")
-      li.list-item #[strong Countries:] !{country_count}
-    a(href="/catalog/items")
-      li.list-item #[strong Items:] !{item_count}
+    p The inventory has the following record counts. #[b Click] on one to navigate to it's detail page:
+    ul
+      a(href="/catalog/categories")
+        li.list-item #[strong Categories:] !{category_count}
+      a(href="/catalog/countries")
+        li.list-item #[strong Countries:] !{country_count}
+      a(href="/catalog/items")
+        li.list-item #[strong Items:] !{item_count}
