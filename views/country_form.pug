@@ -12,7 +12,7 @@ block content
             p!= error.msg
         hr
     div.form-area
-        form(method="post" action="" enctype="multipart/form-data")
+        form#country-form(method="post" action="" enctype="multipart/form-data")
             div 
                 label(for="name") Country Name: 
                 input#name(placeholder="Ethiopia, United Kingdom, etc." name="name" required value=(undefined===country ? "" : country.name))
@@ -29,8 +29,8 @@ block content
             else 
                 div 
                     label(for="flag_img") Flag image #[em #[strong (svg file)]]
-                    input#flag_img(type="file" name="flag_img" accept="image/*")
-            button(type='submit' onclick="submitLoader()") Submit
+                    input#flag_img(type="file" name="flag_img" accept="image/*" required)
+            button#submit(type='submit') Submit
         div.form-info-wrapper
             div 
                 p Each country has a unique three letter abbreviation. Take a look at a complete list 
@@ -40,3 +40,11 @@ block content
                 p Flag images #[em must] be SVG files. You can look for flags on 
                     a(href="https://www.svgrepo.com/collection/twemoji-emojis/4?search=flag") SVG Repo 
                     | and then upload them here.
+    script(type='text/javascript').
+        document.getElementById('country-form').addEventListener('submit', function(event) {
+            submitLoaderCountry();
+        });
+        function submitLoaderCountry() {
+            const loader = document.querySelector(".loading");
+            loader.style.display = "block";
+        }
