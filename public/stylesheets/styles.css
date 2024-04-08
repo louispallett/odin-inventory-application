@@ -190,8 +190,9 @@ span {
     padding: 10px;
 }
 
-input[type="file"] {
-    /* display: none; */
+label[for="flag_img"],
+input[type="file"]:hover {
+    cursor: pointer;
 }
 
 .custom-file-upload {
@@ -393,7 +394,7 @@ textarea,
 }
 
 input[type="radio"] {
-    margin: 0 10px;
+    /* margin: 0 10px; */
     height: 1em;
     /* border: 2px solid var(--base-coffee); */
 }
@@ -405,6 +406,23 @@ input[type="radio"] {
 
 .radio > div {
     animation: fade 1.3s ease forwards;
+}
+
+.country-image-exists {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px
+}
+
+.country-image-exists > img {
+    height: 3em;
+}
+
+.country-image-exists > p {
+    margin: 0;
+    padding: 0;
+    font-size: .8rem;
 }
 
 @keyframes bounce {
@@ -465,6 +483,10 @@ input[type="radio"] {
     .exit-menu-btn {
         display: block;
     }
+
+    main {
+        padding: 10px;
+    }
 }
 
 @media only screen and (min-width: 1001px) {
@@ -488,7 +510,7 @@ input[type="radio"] {
     }
 }
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 630px) {
     .title {
         font-size: 2rem;
         margin-top: 10px;
@@ -503,6 +525,10 @@ input[type="radio"] {
 
     input, textarea, select {
         width: 90%;
+    }
+
+    .radio {
+        width: 100%;
     }
 }
 

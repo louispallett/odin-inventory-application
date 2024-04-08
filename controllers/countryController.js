@@ -1,9 +1,11 @@
 const Country = require("../models/country");
 const Item = require("../models/item");
 
+const replaceEncodedCharacters = require("../public/javascripts/encodedChar");
+const cloudinary = require("../public/javascripts/cloudinary");
+
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
-const cloudinary = require("../public/javascripts/cloudinary");
 const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink);
@@ -52,8 +54,6 @@ exports.country_create_post = [
     .trim()
     .isLength({ min: 3, max: 3})
     .escape(),
-  body("image_url", "")
-    .trim(),
   
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -82,7 +82,6 @@ exports.country_create_post = [
 
     //  Check for image upload:
     const result = await cloudinary.uploader.upload(req.file.path, { folder: "flags" }, (error, result) => {
-      console.log(error, result);
     });
 
     await unlinkFile(req.file.path);
@@ -137,7 +136,8 @@ exports.country_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display country update form on GET.
 exports.country_update_get = asyncHandler(async (req, res, next) => {
-  const country = await Country.findById(req.params.id);
+  const country = await Country.findById(req.params.id).exec();
+
 
   if (country === null) {
     const err = new Error("Country not found");
@@ -148,7 +148,7 @@ exports.country_update_get = asyncHandler(async (req, res, next) => {
   res.render("country_form", {
     title: "Update Country",
     country: country,
-  })
+  });
 });
 
 // Handle country update on POST.
@@ -161,20 +161,22 @@ exports.country_update_post = [
     .trim()
     .isLength({ min: 3, max: 3})
     .escape(),
-  body("image_url", "")
-    .trim(),
-    // TODO: This needs more validation (particularly regarding urls... see installed package)
-
+  
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
     const country = new Country({
       name: req.body.name,
       abbreviation: req.body.abbreviation,
-      image_url: req.body.image_url,
+      image_url: "",
+      cloudinary_id: "",
       _id: req.params.id,
     });
 
+    country.name = replaceEncodedCharacters(country.name);
+    country.abbreviation = replaceEncodedCharacters(country.abbreviation);
+
+    
     if (!errors.isEmpty()) {
       res.render("country_form", {
         title: "Update Country",
@@ -182,15 +184,29 @@ exports.country_update_post = [
         errors: errors.array(),
       });
       return;
-    } else if (!isUrlHttp(req.body.image_url) || !isImageUrl(req.body.image_url)) {
-      res.render("country_form", {
-        title: "Update Country",
-        country: country,
-        errors: [{ path: "image_url", msg: "Image Url must be a valid HTTP image URL"}],
-      });
-    } else {
-        const updatedCountry = await Country.findByIdAndUpdate(req.params.id, country, {});
-        res.redirect(updatedCountry.url);
     }
+    
+    // Get original country info (ONLY for replacing/keeping image!)
+    const originalCountry = await Country.findById(req.params.id);
+    
+    if (req.file) {
+      // Delete original image from cloudinary
+      await cloudinary.uploader.destroy(originalCountry.cloudinary_id);
+      // Upload new image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, { folder: "flags" }, (error, result) => {
+        return;
+      });
+      // Delete file from uploads/
+      await unlinkFile(req.file.path);
+      // Assign our new urls to the new country
+      country.image_url = result.secure_url;
+      country.cloudinary_id = result.public_id;
+    } else {
+      country.image_url = originalCountry.image_url;
+      country.cloudinary_id = originalCountry.cloudinary_id;
+    }
+
+    const updatedCountry = await Country.findByIdAndUpdate(req.params.id, country);
+    res.redirect(updatedCountry.url);
   })
 ];

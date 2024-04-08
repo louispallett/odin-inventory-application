@@ -1,6 +1,8 @@
 connection.js
 package-lock.json
-public/javascripts/
+public/javascripts/cloud_management.js
+public/javascripts/cloudinary.js
+public/javascripts/cloud_management.js
 
 # TEMP #
 public/images/

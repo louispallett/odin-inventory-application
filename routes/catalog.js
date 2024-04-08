@@ -81,7 +81,7 @@ router.post("/country/:id/delete", country_controller.country_delete_post);
 router.get("/country/:id/update", country_controller.country_update_get);
 
 // POST request to update Genre.
-router.post("/country/:id/update", country_controller.country_update_post);
+router.post("/country/:id/update", upload.single("flag_img"), country_controller.country_update_post);
 
 // GET request for one Genre.
 router.get("/country/:id", country_controller.country_detail);
