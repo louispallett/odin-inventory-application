@@ -16,7 +16,7 @@ block content
             div 
                 label(for="name") Category Name: 
                 input#name(placeholder="Coffee, Tea, etc." name="name" required value=(undefined===category ? '' : category.name))
-            button(type='submit') Submit
+            button(type='submit' onclick="submitLoader()") Submit
         div.form-info-wrapper
             div
                 p Category names should be general and not too specific! Take a full list of our current categories 

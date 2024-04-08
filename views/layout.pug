@@ -15,6 +15,10 @@ html(lang="en")
         const menu = document.querySelector("nav");
         menu.style.display = "none";
       }
+      function submitLoader() {
+        const loader = document.querySelector(".loading");
+        loader.style.display = "block";
+      }
   body
     img.show-menu-btn(src="/images/menu-btn.svg" onclick="showMenu()")
     div.main-wrapper
@@ -63,3 +67,4 @@ html(lang="en")
               img(src="/images/logo.png" class="logo")
         main
           block content
+    img.loading(src="/images/loading.svg" style="display: none;")

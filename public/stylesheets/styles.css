@@ -459,6 +459,14 @@ input[type="radio"] {
     font-size: .8rem;
 }
 
+.loading {
+    padding: 20px;
+    position: fixed;
+    left: 25vw;
+    top: 40vh;
+    animation: rotate 1s linear infinite;
+}
+
 @keyframes bounce {
     100% {
       transform:translateY(-20px);

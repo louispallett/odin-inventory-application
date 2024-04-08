@@ -18,6 +18,6 @@ block content
         form(method='POST')
             div.form-group
                 input#itemid.form-control(type='hidden', name='itemid', value=item._id )
-            button.btn.btn-primary(type='submit') Delete
+            button(type='submit' onclick="submitLoader()") Delete
         a(href=`/catalog/item/${item._id}` tabindex='-1')
             button Back

@@ -27,6 +27,6 @@ block content
         form(method='POST')
             div.form-group
                 input#countryid.form-control(type='hidden', name='countryid', value=country._id )
-            button.btn.btn-primary(type='submit') Delete
+            button(type='submit' onclick="submitLoader()") Delete
         a(href=`/catalog/country/${country._id}` tabindex='-1')
             button Back
