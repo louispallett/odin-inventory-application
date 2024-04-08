@@ -1,19 +1,19 @@
 # Inventory Application
 #### _Course of [The Odin Project](https://www.theodinproject.com/lessons/nodejs-inventory-application)_
 
-<p align="center">
-    ![Static Badge](https://img.shields.io/badge/build-passing-brightgreen?style=flat&logo=license)
-    ![Static Badge](https://img.shields.io/badge/license-GPL2.0-green?style=flat&logo=license)
-</p>
 
-<p align="center">
-    <img src="https://res.cloudinary.com/divlee1zx/image/upload/v1712600284/yji1vknark7figuzcw3f.png" alt="Screenshot from the live website, showing the details for the country of Ethiopia - the flag of which is displayed on the right. On the left the products originating from this country are listed"/>
-</p>
+![Static Badge](https://img.shields.io/badge/build-passing-brightgreen?style=flat&logo=license)
+![Static Badge](https://img.shields.io/badge/license-GPL2.0-green?style=flat&logo=license)
+
+
+![Screenshot from the live website, showing the details for the country of Ethiopia - the flag of which is displayed on the right. On the left the products originating from this country are listed](https://res.cloudinary.com/divlee1zx/image/upload/v1712600284/yji1vknark7figuzcw3f.png)
 
 ---
 
-### [Live link](https://desert-yielding-volleyball.glitch.me/catalog) 
-Hosted by Glitch (it can take a few minutes to start up!).
+
+### [Live link to the page](https://desert-yielding-volleyball.glitch.me/catalog) 
+Hosted by Glitch
+
 
 _Inventory Application_ by LowPal is a NodeJS site for managing an inventory for, in this case, a shop which sells coffee (something dear to my heart), tea, brewing equipment, etc. Users can manage the database through all four CRUD (Create, Read, Update, Delete) operations, which syncs to a backend NoSQL database (MongoDB).
 
