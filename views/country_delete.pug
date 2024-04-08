@@ -5,8 +5,9 @@ block content
         div
             h1=title
             h2=country.name
-    hr
-    p Country: #[strong #{country.name}]
+        div 
+            img(src=country.image_url)
+            h3=country.abbreviation    
     hr
     div.content-wrapper
     if allCountryItems.length
@@ -18,7 +19,7 @@ block content
                 dt 
                     a.list-item(href=`/catalog/item/${item._id}`)
                         p #[strong #{item.name}]
-                        p £#{item.price}0
+                        p £#{item.price}
                 dd
     else
         p Do you really want to delete this country?
