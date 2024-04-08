@@ -85,6 +85,7 @@ exports.country_create_post = [
 
     //  Check for image upload:
     const result = await cloudinary.uploader.upload(req.file.path, { folder: "flags" }, (error, result) => {
+    console.log(error, result)
     });
 
     await unlinkFile(req.file.path);
@@ -197,7 +198,6 @@ exports.country_update_post = [
       await cloudinary.uploader.destroy(originalCountry.cloudinary_id);
       // Upload new image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, { folder: "flags" }, (error, result) => {
-        return;
       });
       // Delete file from uploads/
       await unlinkFile(req.file.path);
