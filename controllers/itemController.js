@@ -31,7 +31,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 exports.item_list = asyncHandler(async (req, res, next) => {
   const allItems = await Item.find().sort({ name:1 }).exec();
   res.render("item_list", {
-    title: "List of Items Sold",
+    title: "List of Products",
     item_list: allItems,
   });
 });
@@ -65,7 +65,7 @@ exports.item_create_get = asyncHandler(async (req, res, next) => {
     Country.find().sort({ abbreviation:1 }).exec()
   ]);
   res.render("item_form", { 
-    title: "Create Item",
+    title: "Create Product",
     categories: categories,
     countries: countries,
   });
@@ -126,7 +126,7 @@ exports.item_create_post = [
       ]);
 
       res.render("item_form", { 
-        title: "Create Item",
+        title: "Create Product",
         categories: allCategories,
         countries: allCountries,
         errors: errors.array(),
@@ -179,7 +179,7 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
   }
 
   res.render("item_form", { 
-    title: "Update Item",
+    title: "Update Product",
     categories: categories,
     countries: countries,
     item: item,
@@ -239,7 +239,7 @@ exports.item_update_post = [
         Country.find().sort({ abbreviation:1 }).exec()
       ]);
       res.render("item_form", { 
-        title: "Update Item",
+        title: "Update Product",
         categories: categories,
         countries: countries,
         item: item,
