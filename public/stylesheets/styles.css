@@ -265,7 +265,7 @@ textarea,
 /* BANNER */
 
 .banner-wrapper {
-    border-radius: 0 0 5px 5px;
+    /* border-radius: 0 0 5px 5px; */
     background: linear-gradient(-80deg, #442c1a, #5f4431, var(--base-coffee), #996540);
     color: #fff;
     background-size: 400% 400%;
@@ -290,6 +290,10 @@ nav.top > ul {
     padding: 0 10px;
     justify-content: flex-end;
     gap:15px;
+}
+
+nav.top > ul > a {
+    padding-top: 15px;
 }
 
 nav.top > ul > a:hover {
