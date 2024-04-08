@@ -1,18 +1,18 @@
+const compression = require("compression");
+const cookieParser = require('cookie-parser');
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
+const helmet = require("helmet");
 const logger = require('morgan');
+const mongoose = require("mongoose");
+const path = require('path');
 
 const indexRouter = require('./routes/index');
 const catalogRouter = require('./routes/catalog');
 
-const connectionString = require("./public/javascripts/connection");
-
-const mongoose = require("mongoose");
+const dev_uri = require("./public/javascripts/connection")
 mongoose.set("strictQuery", false);
-const dev_db_url = connectionString;
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = process.env.MONGODB_URI || dev_uri;
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -25,11 +25,22 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(cookieParser());
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "default-src": ["'self'"],
+      "script-src": ["'self'", "'unsafe-inline'", "'res.cloudinary.com'"],
+      "script-src-attr": ["'self'", "'unsafe-inline'", "'show-menu'", "'close-menu'", "'submitLoader'"],
+      "img-src": ["'self'", "*.cloudinary.com"]
+    },
+  }),
+);
+app.use(logger('dev'));
 
 app.use('/', indexRouter);
 app.use('/catalog', catalogRouter);
