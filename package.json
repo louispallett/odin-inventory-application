@@ -1,6 +1,9 @@
 {
   "name": "express-template",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=16.14.2"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -14,6 +17,7 @@
     "debug": "~2.6.9",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^7.2.0",
     "express-validator": "^7.0.1",
     "helmet": "^7.1.0",
     "http-errors": "~1.6.3",

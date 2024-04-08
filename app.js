@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const logger = require('morgan');
 const mongoose = require("mongoose");
 const path = require('path');
+const RateLimit = require("express-rate-limit");
 
 const indexRouter = require('./routes/index');
 const catalogRouter = require('./routes/catalog');
@@ -18,6 +19,11 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
+
+const limiter = RateLimit({
+  windowMs: 1 *  60 * 1000,
+  max: 60,
+});
 
 const app = express();
 
@@ -41,6 +47,7 @@ app.use(
   }),
 );
 app.use(logger('dev'));
+app.use(limiter);
 
 app.use('/', indexRouter);
 app.use('/catalog', catalogRouter);
