@@ -5,6 +5,7 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/stylesheets/styles.css")
+    <link rel="icon" type="image/x-icon" href="/images/beans.svg">
     script(type='text/javascript').
       function showMenu() {
         const menu = document.querySelector("nav");
@@ -16,11 +17,11 @@ html(lang="en")
       }
   body
     img.show-menu-btn(src="/images/menu-btn.svg" onclick="showMenu()")
-    div(class="main-wrapper")
-      nav
+    div.main-wrapper
+      nav.side
         block sidebar
           img.exit-menu-btn(src="/images/close.svg" onclick="closeMenu()")
-          ul(class="sidebar-list")
+          ul.sidebar-list
             a(href="/catalog")
               li Home
             a(href="/catalog/items")
@@ -36,12 +37,29 @@ html(lang="en")
               li Create new category
             a(href="/catalog/country/create")
               li Create new country
-      section(class="main-body")
-        section(class="banner")
-          div 
-            div.title Coffee by the River
-            img(src="/images/beans.svg" class="beans")
-          a(href="/" tabindex='-1')
-            img(src="/images/logo.png" class="logo")
+      section.main-body
+        section.banner-wrapper
+          nav.top
+            ul.sidebar-list
+              a(href="/catalog")
+                li Home
+              a(href="/catalog/items")
+                li All items
+              a(href="/catalog/categories")
+                li All categories
+              a(href="/catalog/countries")
+                li All countries
+              a(href="/catalog/item/create")
+                li Create new item
+              a(href="/catalog/category/create")
+                li Create new category
+              a(href="/catalog/country/create")
+                li Create new country          
+          section.banner
+            div 
+              div.title Coffee by the River
+              img(src="/images/beans.svg" class="beans")
+            a(href="/" tabindex='-1')
+              img(src="/images/logo.png" class="logo")
         main
           block content
